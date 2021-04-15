@@ -44,17 +44,12 @@ class Box {
         height = h;
         depth = d;
     }
-/*     код для класса BoxDemo6
+
     Box() {
         System.out.println("Конструирование объекта Box");
         width = 10;
         height = 10;
         depth = 10;
     }
-*/
-
-
-
-
 
 }
