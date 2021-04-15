@@ -9,7 +9,7 @@ public class BreakErr {
         }
         for (int j = 0; j < 100; j++) {
             if (j ==10)
-                break one; // это блок кода выводить ошибку
+              //  break one; // это блок кода выводить ошибку
             System.out.println(j + " ");
         }
     }
