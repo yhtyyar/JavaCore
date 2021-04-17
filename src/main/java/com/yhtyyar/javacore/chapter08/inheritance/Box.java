@@ -2,9 +2,9 @@ package main.java.com.yhtyyar.javacore.chapter08.inheritance;
 
 public class Box {
 
-    double width;
-    double height;
-    double depth;
+    private double width;
+    private double height;
+    private double depth;
 
     Box(Box ob) {
         width = ob.width;

@@ -1,4 +1,4 @@
-package main.java.com.yhtyyar.javacore.chapter08;
+package main.java.com.yhtyyar.javacore.chapter08.keywords;
 
 public class Acces {
 
