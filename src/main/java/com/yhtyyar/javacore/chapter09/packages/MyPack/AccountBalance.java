@@ -1,4 +1,4 @@
-package main.java.com.yhtyyar.javacore.chapter09.Packages.MyPack;
+package main.java.com.yhtyyar.javacore.chapter09.packages.MyPack;
 
 public class AccountBalance {
 
