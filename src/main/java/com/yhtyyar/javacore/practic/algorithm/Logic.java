@@ -4,45 +4,33 @@ import java.util.*;
 
 public class Logic {
 
+    public boolean isValid(String s) {
 
-    private static int [] firstArray = new int[7];
-    private static int[] secondArray = new int[7];
+        HashMap <Character, Character> closeBracket = new HashMap <Character, Character>();
+        closeBracket.put('{', '}');
+        closeBracket.put('(', ')');
+        closeBracket.put('[', ']');
 
-    private final Scanner input = new Scanner(System.in);
 
+        HashSet <Character> openBracket = new HashSet <Character>(closeBracket.values());
+        ArrayDeque <Character> arrayDeque = new ArrayDeque <Character>();
 
-     void inputNumbers() {
-
-        System.out.println("Введите первый набор чисел ");
-        for (int i = 0; i < firstArray.length; i++) {
-            firstArray [i] = input.nextInt();
-        }
-
-         System.out.println();
-         System.out.println("Введите второй набор чисел ");
-         for (int i = 0; i < secondArray.length; i++) {
-             secondArray [i] = input.nextInt();
-         }
-
-        System.out.println("Положительные и совподающие числа");
-        for (int i = 0; i < firstArray.length; i++) {
-            for (int j = 0; j < secondArray.length; j++) {
-                if (firstArray[i] > 0) {
-                    int first = firstArray[i];
-                    if (secondArray[j] > 0) {
-                        int second = secondArray[j];
-                        if (first == second){
-                            System.out.print(first + " ");
-                        } else {
-                            System.out.print("");
-                        }
-                    } else if (secondArray[j] <= 0){
-                        System.out.print("");
-                    }
-                } else if (firstArray[i] <= 0) {
-                    System.out.print("");
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            char array = chars[i];
+            if (openBracket.contains(array)) {
+                arrayDeque.push(array);
+            } else { // закрывающие скобки
+                if (arrayDeque.isEmpty()) {
+                    return false;
                 }
+                if (closeBracket.get(array) != arrayDeque.peek()) {
+                    return false;
+                }
+                arrayDeque.pop();
             }
         }
+
+        return arrayDeque.isEmpty();
     }
 }
