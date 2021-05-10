@@ -4,33 +4,56 @@ import java.util.*;
 
 public class Logic {
 
-    public boolean isValid(String s) {
+    static  String text;
 
-        HashMap <Character, Character> closeBracket = new HashMap <Character, Character>();
-        closeBracket.put('{', '}');
-        closeBracket.put('(', ')');
-        closeBracket.put('[', ']');
+    public static void main(String [] args) {
+
+        final Scanner input = new Scanner(System.in);
+
+        System.out.println("Введите текст: ");
+        text = input.nextLine();
+
+        isValid(text);
+
+        if (isValid(text) == true) {
+            System.out.println(" Всё правильно! ");
+        } else {
+            System.out.println("Закройте не закрытые скобки!");
+        }
+    }
 
 
-        HashSet <Character> openBracket = new HashSet <Character>(closeBracket.values());
-        ArrayDeque <Character> arrayDeque = new ArrayDeque <Character>();
 
-        char[] chars = s.toCharArray();
+    public static boolean isValid (String string) {
+
+        HashMap <Character, Character> closeBracket = new HashMap <>();
+        closeBracket.put('}', '{');  // ключь и значение
+        closeBracket.put(')', '(');
+        closeBracket.put(']', '[');
+
+
+        HashSet <Character> openBracket = new HashSet <>(closeBracket.values()); // передаем значения
+        ArrayDeque <Character> arrayDeque = new ArrayDeque <>();
+
+        char[] chars = string.toCharArray();
+
         for (int i = 0; i < chars.length; i++) {
-            char array = chars[i];
+            char array = chars [i];
+
+            // проверка на присутсвие значения и возвращает true, если там есть все эелементы
             if (openBracket.contains(array)) {
-                arrayDeque.push(array);
-            } else { // закрывающие скобки
+                arrayDeque.push(array); // добавляет элемент в самое начало
+            } else {
                 if (arrayDeque.isEmpty()) {
                     return false;
                 }
-                if (closeBracket.get(array) != arrayDeque.peek()) {
+                if (arrayDeque.peek() != closeBracket.get(array) ) {
                     return false;
                 }
-                arrayDeque.pop();
+                arrayDeque.poll(); // возвращает с удалением элемента из начала очереди
             }
         }
 
-        return arrayDeque.isEmpty();
+        return arrayDeque.isEmpty(); // возвращает true если пустая строка, если нет то false
     }
 }

@@ -14,8 +14,7 @@ public class Main {
 
         final Scanner input = new Scanner(System.in);
 
-
-        System.out.println("Введите первый набор чисел ");
+        System.out.println("Введите первый набор чисел: ");
         for (int i = 0; i < firstArray.length; i++) {
             firstArray [i] = input.nextInt();
         }
@@ -28,14 +27,14 @@ public class Main {
 
         System.out.println("Отсортированные положительные и совподающие числа");
         for (int i = 0; i < firstArray.length; i++) {
-            for (int j = 0; j < secondArray.length; j++) {
-                if (firstArray[i] > 0) {
-                    int first = firstArray[i];
+            if (firstArray[i] > 0) {
+                int first = firstArray[i];
+                Arrays.sort(firstArray);   //сортировка массива
 
-                    Arrays.sort(firstArray);   //сортировка массива
-
+                for (int j = 0; j < secondArray.length; j++) {
                     if (secondArray[j] > 0) {
                         int second = secondArray[j];
+
                         if (first == second){
                             System.out.print(firstArray [i] + " ");
                         } else {
@@ -44,9 +43,9 @@ public class Main {
                     } else if (secondArray[j] <= 0){
                         System.out.print("");
                     }
-                } else if (firstArray[i] <= 0) {
-                    System.out.print("");
                 }
+            } else if (firstArray[i] <= 0) {
+                System.out.print("");
             }
         }
 
