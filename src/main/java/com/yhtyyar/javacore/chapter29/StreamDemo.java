@@ -22,7 +22,7 @@ public class StreamDemo {
         Stream <Integer> myStream = myList.stream();
 
         // получение минимального и максимального значения
-        Optional <Integer> minVal =myStream.min(Integer::compare);
+        Optional <Integer> minVal = myStream.min(Integer::compare);
         if (minVal.isPresent()) {
             System.out.println("Минимальное значение: " + minVal.get());
         }
@@ -30,7 +30,7 @@ public class StreamDemo {
         //нужно получить новый поток данных, потому что
         // предыдущая операция была окнечной(употребивший поток)
         myStream =myList.stream();
-        Optional <Integer> maxVal =myStream.max(Integer::compare);
+        Optional <Integer> maxVal = myStream.max(Integer::compare);
         if (maxVal.isPresent()) {
             System.out.println("Максимальное значение: " + maxVal.get());
         }
