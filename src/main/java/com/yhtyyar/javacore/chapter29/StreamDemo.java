@@ -29,7 +29,7 @@ public class StreamDemo {
 
         //нужно получить новый поток данных, потому что
         // предыдущая операция была окнечной(употребивший поток)
-        myStream =myList.stream();
+        myStream = myList.stream();
         Optional <Integer> maxVal = myStream.max(Integer::compare);
         if (maxVal.isPresent()) {
             System.out.println("Максимальное значение: " + maxVal.get());
