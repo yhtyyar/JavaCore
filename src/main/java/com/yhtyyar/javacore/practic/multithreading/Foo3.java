@@ -1,119 +1,121 @@
 package main.java.com.yhtyyar.javacore.practic.multithreading;
 
 class Main3 {
-    public static void main(String [] args) {
 
-        AThread3 aThread = new AThread3();
-        BThread3 bThread = new BThread3();
-        CThread3 cThread = new CThread3();
+    public static void main (String [] args) {
+
+        ThirdThread thirdThread = new ThirdThread();
+        SecondThread secondThread = new SecondThread();
+        FirstThread firstThread = new FirstThread();
+
+
+
+        try {
+            firstThread.thread.join();
+            Thread.sleep(500);
+
+        } catch (InterruptedException e) {
+            System.out.println("Прервано.");
+        }
+
+        secondThread.bThread();
+
+        try {
+            secondThread.thread.join();
+            Thread.sleep(500);
+
+        } catch (InterruptedException e) {
+            System.out.println("Прервано.");
+        }
+
+        thirdThread.cThread();
+
+
 
 
     }
 }
 
-
 class Foo3 {
-
 
     public void first() {
         System.out.print("first");
-
     }
 
     public void second() {
         System.out.print("second");
-
     }
 
     public void third() {
         System.out.print("third");
-
     }
 
 }
 
-class AThread3 implements Runnable {
 
-    Foo3 fooo = new Foo3();
+class FirstThread implements Runnable{
+
+    Foo3 foo3 = new Foo3();
     Thread thread;
 
-    AThread3() {
 
-        thread = new Thread(this);
-        thread.start();
+    FirstThread() {
 
+       thread =  new Thread(this);
+       thread.start();
     }
 
-    void notifyA(){
-        notify();
-    }
-
-    @Override
     public void run() {
 
-        fooo.first();
-
+       foo3.first();
     }
+
 }
 
-class BThread3 implements Runnable {
 
-    Foo3 fooo = new Foo3();
+class SecondThread implements Runnable {
+
     Thread thread;
-    AThread3 aThread3;
+    Foo3 foo3 = new Foo3();
+    boolean suspendFlag = false;
 
-
-    BThread3() {
+    void bThread() {
         thread = new Thread(this);
         thread.start();
+    }
+
+    public void run() {
+
+            foo3.second();
+
+    }
+
+}
+
+
+class ThirdThread implements Runnable {
+
+    Foo3 foo3 = new Foo3();
+    Thread thread;
+    boolean suspendFlag = false;
+
+
+    void cThread() {
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    public void run() {
+
+        foo3.third();
 
         try {
-            wait();
+            Thread.sleep(500);
+
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println("Прервано.");
         }
-
-    }
-
-    @Override
-    public void run() {
-            aThread3.notifyA();
-            fooo.second();
-    }
-
-    boolean flag() {
-        return true;
     }
 
 
-}
-
-class CThread3 implements Runnable {
-
-    Foo3 fooo = new Foo3();
-    Thread thread;
-    AThread3 aThread3;
-
-
-    CThread3() {
-
-        thread = new Thread(this);
-        thread.start();
-
-        try {
-            wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    @Override
-    public void run() {
-
-            aThread3.notifyA();
-            fooo.third();
-
-    }
 }

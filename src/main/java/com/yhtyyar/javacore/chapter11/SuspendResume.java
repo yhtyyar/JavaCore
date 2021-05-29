@@ -57,7 +57,7 @@ class NewThread4 implements Runnable{
     public void run() {
 
         try {
-            for (int i = 15; i > 0; i--) {
+            for (int i = 5; i > 0; i--) {
                 System.out.println(name + ": " + i);
                 Thread.sleep(1000);
                 synchronized (this) {
