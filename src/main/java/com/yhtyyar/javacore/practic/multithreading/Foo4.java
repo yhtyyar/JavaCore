@@ -10,11 +10,9 @@ class Main4 {
 
         Foo4 foo = new Foo4();
 
-        BThread4 b = new BThread4(lock,foo);
-        CThread4 c = new CThread4(lock,foo);
-        AThread4 a = new AThread4(lock,foo);
-
-
+        new CThread4(lock,foo);
+        new BThread4(lock,foo);
+        new AThread4(lock,foo);
 
     }
 }
@@ -30,14 +28,15 @@ public class Foo4 {
 
         print("first");
     }
+
     public synchronized void second() {
 
         print("second");
     }
+
     public synchronized void third() {
 
         print("third");
-
     }
 
     private synchronized void print(String str) {
@@ -60,7 +59,6 @@ class AThread4 implements Runnable{
         this.lock = lock;
         this.foo = foo;
         thread = new Thread(this);
-        thread.setPriority(10);
         thread.start();
 
     }
@@ -106,7 +104,6 @@ class BThread4 implements Runnable{
         this.lock = lock;
         this.foo = foo;
         thread = new Thread(this);
-        thread.setPriority(5);
         thread.start();
 
     }
@@ -153,7 +150,6 @@ class CThread4 implements Runnable{
         this.lock = lock;
         this.foo = foo;
         thread = new Thread(this);
-        thread.setPriority(1);
         thread.start();
 
     }
