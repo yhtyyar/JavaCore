@@ -12,7 +12,6 @@ class Main3 {
 
         try {
             firstThread.thread.join();
-            Thread.sleep(500);
 
         } catch (InterruptedException e) {
             System.out.println("Прервано.");
@@ -22,7 +21,6 @@ class Main3 {
 
         try {
             secondThread.thread.join();
-            Thread.sleep(500);
 
         } catch (InterruptedException e) {
             System.out.println("Прервано.");
@@ -37,6 +35,7 @@ class Main3 {
 }
 
 class Foo3 {
+
 
     public void first() {
         System.out.print("first");
@@ -77,7 +76,6 @@ class SecondThread implements Runnable {
 
     Thread thread;
     Foo3 foo3 = new Foo3();
-    boolean suspendFlag = false;
 
     void bThread() {
         thread = new Thread(this);
@@ -97,7 +95,6 @@ class ThirdThread implements Runnable {
 
     Foo3 foo3 = new Foo3();
     Thread thread;
-    boolean suspendFlag = false;
 
 
     void cThread() {
