@@ -17,6 +17,7 @@ class Main4 {
     }
 }
 
+
 class Shared {
     static int count = 0;
 }
@@ -45,6 +46,7 @@ public class Foo4 {
     }
 
 }
+
 
 class AThread4 implements Runnable{
 
