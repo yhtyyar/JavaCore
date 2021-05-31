@@ -35,7 +35,6 @@ public class Foo {
         bThread.nextThread.add(cThread);
 
 
-
         // запускаем код с первого потока А
         aThread.start.countDown();
     }
