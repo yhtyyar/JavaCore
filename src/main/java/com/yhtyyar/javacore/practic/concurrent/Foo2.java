@@ -1,4 +1,4 @@
-package main.java.com.yhtyyar.javacore.practic.multithreading;
+package main.java.com.yhtyyar.javacore.practic.concurrent;
 
 class Main2 {
 

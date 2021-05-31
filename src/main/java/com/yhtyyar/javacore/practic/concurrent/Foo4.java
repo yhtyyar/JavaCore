@@ -1,4 +1,5 @@
-package main.java.com.yhtyyar.javacore.practic.multithreading;
+package main.java.com.yhtyyar.javacore.practic.concurrent;
+
 
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -24,6 +25,7 @@ class Shared {
 
 
 public class Foo4 {
+
 
     public synchronized void first() {
 
@@ -89,8 +91,6 @@ class AThread4 implements Runnable{
         } finally {
             lock.unlock();
         }
-
-
     }
 }
 
