@@ -9,11 +9,9 @@ class Foo2 {
         ExecutorService ex = Executors.newFixedThreadPool(3);
         Foo2 foo2 = new Foo2();
 
-        ex.execute(new BThread(foo2));
         ex.execute(new CThread(foo2));
+        ex.execute(new BThread(foo2));
         ex.execute(new AThread(foo2));
-
-
     }
 
     public synchronized void first() {
@@ -25,7 +23,6 @@ class Foo2 {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
 
         print("first");
@@ -60,7 +57,6 @@ class Foo2 {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
 
         print("third");
@@ -96,7 +92,6 @@ class AThread implements Runnable{
 
         foo2.first();
     }
-
 }
 
 
@@ -115,7 +110,6 @@ class BThread implements Runnable {
 
         foo2.second();
     }
-
 }
 
 
@@ -135,8 +129,6 @@ class CThread implements Runnable {
         foo2.third();
 
     }
-
-
 }
 
 
