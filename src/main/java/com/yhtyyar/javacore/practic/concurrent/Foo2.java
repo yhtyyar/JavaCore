@@ -1,146 +1,147 @@
 package main.java.com.yhtyyar.javacore.practic.concurrent;
 
-import java.util.concurrent.Semaphore;
-
-
+import java.util.concurrent.*;
 
 class Foo2 {
 
-    Semaphore semaphore1 = new Semaphore(1);
-    Semaphore semaphore2 = new Semaphore(1);
-    Runnable run;
+    public static void main(String [] args) {
 
-    Foo2 () {
+        ExecutorService ex = Executors.newFixedThreadPool(3);
+        Foo2 foo2 = new Foo2();
 
-        try {
+        ex.execute(new BThread(foo2));
+        ex.execute(new CThread(foo2));
+        ex.execute(new AThread(foo2));
 
-            semaphore1.acquire();
-            semaphore2.acquire();
-        } catch (InterruptedException e) {
-            System.out.println(e);
-        }
+
     }
 
-    public synchronized void first(Runnable aThread) {
+    public synchronized void first() {
 
-        run = aThread;
-        aThread.run();
+        while (Shared1.count != 1) {
+
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
         print("first");
-        semaphore1.release();
+        Shared1.count++;
+        notifyAll();
     }
 
 
-    public synchronized void second(Runnable bThread) {
+    public synchronized void second() {
 
-        run = bThread;
-        try {
-            semaphore1.acquire();
-        } catch (InterruptedException e) {
-            System.out.println(e);
+
+        while (Shared1.count != 2) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                System.out.println("Прерван поток 2");
+            }
         }
 
-        bThread.run();
         print("second");
-        semaphore2.release();
+        Shared1.count++;
+        notifyAll();
     }
 
 
-    public synchronized void third(Runnable cThread) {
+    public synchronized void third() {
 
-        run = cThread;
-        try {
-            semaphore2.acquire();
-        } catch (InterruptedException e) {
-            System.out.println(e);
+        while (Shared1.count != 3) {
+
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
         }
 
-        cThread.run();
         print("third");
+        Shared1.count++;
+        notifyAll();
     }
 
 
-    public synchronized void print(String str) {
+    public  synchronized void print(String str) {
         System.out.print(str);
     }
 
-
-    public static void main(String [] args) {
-
-        Foo2 foo2 = new Foo2();
-
-        AThread2 aThread2 = new AThread2(foo2);
-        BThread2 bThread2 = new BThread2(foo2);
-        CThread2 cThread2 = new CThread2(foo2);
-
-    }
 }
 
+class Shared1 {
+
+    static int count = 1;
+}
+
+class AThread implements Runnable{
+
+    Foo2 foo2;
 
 
-class AThread2 extends Thread {
 
-    Thread thread;
-    Foo2 foo;
+    AThread(Foo2 foo2) {
 
-
-    AThread2 (Foo2 foo) {
-
-        this.foo = foo;
-        thread = new Thread(this);
-        thread.start();
+        this.foo2 = foo2;
+        new Thread(this).start();
     }
 
-
-    @Override
     public void run() {
 
-        foo.first(thread);
+        foo2.first();
     }
+
 }
 
 
-class BThread2 extends Thread{
+class BThread implements Runnable {
 
-    Thread thread;
-    Foo2 foo;
 
-    BThread2 (Foo2 foo) {
+    Foo2 foo2;
 
-        this.foo = foo;
-        thread = new Thread(this);
-        thread.start();
+    BThread(Foo2 foo2) {
+
+        this.foo2 = foo2;
+        new Thread(this).start();
     }
 
-
-    @Override
     public void run() {
 
-        foo.second(thread);
+        foo2.second();
     }
+
 }
 
 
-class CThread2 extends Thread{
+class CThread implements Runnable {
 
-    Thread thread;
-    Foo2 foo;
+    Foo2 foo2;
 
+    CThread(Foo2 foo2) {
 
-
-    CThread2 (Foo2 foo) {
-
-        this.foo = foo;
-        thread = new Thread(this);
-        thread.start();
+        this.foo2 = foo2;
+        new Thread(this).start();
     }
 
 
-    @Override
     public void run() {
 
-        foo.third(thread);
+        foo2.third();
+
     }
+
+
 }
+
+
+
+
 
 
 
