@@ -20,7 +20,6 @@ public class Foo {
         AThread aThread = new AThread(foo);
         BThread bThread = new BThread(foo);
 
-
     }
 
     public  void first () {

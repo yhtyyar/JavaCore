@@ -49,6 +49,5 @@ class CThread implements Runnable {
     public void run() {
 
         foo.third();
-
     }
 }
